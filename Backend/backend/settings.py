@@ -70,15 +70,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database - Supabase PostgreSQL
-# Add your Supabase credentials below or set via environment variables
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'postgres'),
-        'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'YOUR_SUPABASE_PASSWORD_HERE'),
-        'HOST': os.environ.get('DB_HOST', 'YOUR_SUPABASE_HOST.supabase.co'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'WebByPrompt@123',
+        'HOST': 'db.osvgyxjctkedhdxpzgig.supabase.co',
+        'PORT': '5432',
     }
 }
 
