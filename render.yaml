@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: webbyprompt-backend
+    runtime: python
+    buildCommand: cd Backend && pip install -r requirements.txt
+    startCommand: cd Backend && gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+      - key: DJANGO_SETTINGS_MODULE
+        value: backend.settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "5432"
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://webbyprompt.vercel.app,https://*.vercel.app"
+
+  - type: web
+    name: webbyprompt-frontend
+    runtime: static
+    buildCommand: cd Frontend-Web && npm install && npm run build
+    staticPublishPath: Frontend-Web/dist
+    envVars:
+      - key: NODE_VERSION
+        value: 18.0.0
+      - key: VITE_API_URL
+        value: "https://webbyprompt-backend.onrender.com"
